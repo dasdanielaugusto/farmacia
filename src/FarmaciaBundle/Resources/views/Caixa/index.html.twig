@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Caixa - Farmácia</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:grey; color:yellow;"><span style="color:black;" class="glyphicon glyphicon-sunglasses"></span> Produto</div>
+                <div class="panel-body"style="background-color:#d9d9d9;">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-12" style="min-height:500px;">
+                            <a href="#" class="thumbnail">
+                                <img src="..." alt="...">
+                            </a>
+                            <p style="text-align:center;">Nome do Produto</p>
+                            <p style="text-align:center;">Preço: R$ 120,00</p>
+                               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading"style="background-color:grey; color:yellow;">Produtos na cesta de compra</div>
+                <div class="panel-body" style="background-color:#d9d9d9;">
+                    <p>1. Produto A</p>
+                    <p>1. Produto B</p>
+                    <p>1. Produto C</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"style="background-color:grey; color:yellow;">Total da compra R$</div>
+            </div>
+        </div>
+    </div><!-- /.container -->
+{% endblock %}
