@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Produtos list</h1>
-
+    <h1 style="color:#0000F0;">Lista de produtos <a href="{{ path('produto_new') }}" class="btn btn-primary pull-right ">Novo produto</a></h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Preco</th>
-                <th>Categoria</th>
-                <th>Marca</th>
-                <th>Actions</th>
+                <th style="color:black;text-align:center">Código</th>
+                <th style="color:black;text-align:center">Nome</th>
+                <th style="color:black;text-align:center">Preço</th>
+                <th style="color:black;text-align:center">Categoria</th>
+                <th style="color:black;text-align:center">Marca</th>
+                <th style="color:black;text-align:center">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -36,10 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('produto_new') }}">Create a new produto</a>
-        </li>
-    </ul>
 {% endblock %}

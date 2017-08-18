@@ -5,6 +5,8 @@ namespace FarmaciaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProdutoType extends AbstractType
 {
@@ -13,7 +15,21 @@ class ProdutoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nome')->add('preco')->add('categoria')->add('marca');
+        $builder->add('nome')
+                ->add('preco', MoneyType::class, array(
+                    "currency" => "BRL",
+                    "label" => "Preço"
+                ))
+                ->add('categoria', ChoiceType::class, array(
+                    "choices" => array(
+                        "Remédio" => "remedio",
+                        "Perfumaria" => "perfume",
+                        "Higiene" => "higiene",
+                    ),
+                    "expanded" => false,
+                    "multiple" => false,
+                ))
+                ->add('marca');
     }
     
     /**
