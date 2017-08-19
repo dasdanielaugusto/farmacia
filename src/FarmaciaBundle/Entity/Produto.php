@@ -34,7 +34,8 @@ class Produto
     private $categoria;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\ManyToOne(targetEntity="Marca")
+     * @ORM\JoinColumn(name="marca_id", referencedColumnName="id")
      */
     private $marca;
 
