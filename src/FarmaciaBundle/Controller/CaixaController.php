@@ -22,8 +22,9 @@ class CaixaController extends Controller
     /**
      * @Route("/caixa/novo", name="caixa_novo")
      */
-    public function novoCupomAction() 
+    public function novoCupomAction(Request $request) 
     {
+        $session = $request->getSession();
         $em = $this ->getDoctrine() ->getManager();
         
         $cupom = new \FarmaciaBundle\Entity\CupomFiscal();
@@ -32,10 +33,9 @@ class CaixaController extends Controller
         $em->persist($cupom);
         $em->flush();
         
-        return $this->render("FarmaciaBundle:Caixa:index.html.twig",
-                array(
-                    'cupom' =>$cupom
-                ));
+        $session->set("cupom", $cupom);
+        
+        return $this ->redirectToRoute("caixa_index");
         
     }
     
@@ -44,6 +44,8 @@ class CaixaController extends Controller
      */
     public function addProdutoAction(Request $request) 
     {
+        $session = $request->getSession();
+        
         $id = $request->get('codigo');
         
 //        dump($request);die();
@@ -56,15 +58,19 @@ class CaixaController extends Controller
         
         if ($produto == null)
         {
-            
+            $this->addFlash('erro', "Produto não encontrado!");
+                    
         } else
         {
+            $session->set("produto", $produto);
             
+            $cupom = $session->get("cupom");
+            $cupom->addProduto($produto);
+            
+            $em->flush();
         }
         
-        return $this ->render("FarmaciaBundle:Caixa:index.html.twig", array(
-            'cupom' => array()
-            ));
+        return $this ->redirectToRoute("caixa_index");
     }
     
     /**

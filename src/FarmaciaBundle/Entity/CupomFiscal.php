@@ -85,7 +85,11 @@ class CupomFiscal {
     public function addProduto(\FarmaciaBundle\Entity\Produto $produto)
     {
         $this->produtos[] = $produto;
-
+        
+        $valAnterior = $this->getValorTotal();
+        $novoVal = $valAnterior + $produto->getPreco();
+        $this->setValorTotal($novoVal);
+        
         return $this;
     }
 

@@ -18,21 +18,32 @@
       </div>
     </nav>
     <div class="container">
+        {% for message in app.flashes('erro') %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading" style="background-color:grey; color:yellow;"><span style="color:black;" class="glyphicon glyphicon-sunglasses"></span> Produto</div>
                 <div class="panel-body"style="background-color:#d9d9d9;">
                     <div class="row">
-                        <div class="col-xs-12 col-md-12" style="min-height:500px;">
+                        <div class="col-xs-12 col-md-12" style="min-height:300px;">
                             <form action="{{ path('caixa_add')}}" method="POST">
                                 <div class="input-group">
                                     <input type="text" name="codigo" class="form-control" placeholder="Código">
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-default" type="button">Add</button>
                                     </span>
-                                </div><!-- /input-group -->
-                                <p style="text-align:center;">Preço: R$ 120,00</p>
+                                </div><!-- /input-group --><br>
                             </form>
+                            <div>    
+                                {% if app.session.get('produto') %}
+                                    <p style="text-align:center;">{{ app.session.get('produto').nome }}</p>
+                                    <p style="text-align:center;">{{ app.session.get('produto').categoria }}</p>
+                                    <p style="text-align:center;">R$ {{ app.session.remove('produto').preco }}</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,20 +51,22 @@
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
-                <div class="panel-heading"style="background-color:grey; color:yellow;">Produtos na cesta de compra<span class="pull-right"># {% if cupom %} {{ cupom.id }} {% endif %}</span></div>
+                <div class="panel-heading"style="background-color:grey; color:yellow;">Produtos na cesta de compra<span class="pull-right"># {{ app.session.get("cupom").id }}</span></div>
                 <div class="panel-body" style="background-color:#d9d9d9;">
                     <ol>
-                        <li></li>
+                        {% for item in app.session.get("cupom").produtos %}
+                            <li>{{ item.nome }} - R$ {{ item.preco }} </li>
+                        {% endfor %}
                     </ol>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
         <div class="container">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading"style="background-color:grey; color:yellow;">Total da compra 
-                        <span class="pull-right">R$ {% if cupom %} {{ cupom.valorTotal | number_format(2, ',', '.')}} {% endif %}</span></div>
+                        <span class="pull-right">R$ {{ app.session.get("cupom").valorTotal | number_format(2, ',', '.')}} </span></div>
                 </div>
             </div>
         </div>
